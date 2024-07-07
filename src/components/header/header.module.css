@@ -1,0 +1,47 @@
+.wrapper {
+    background-color: #484283;
+    width: 100vw;
+}
+
+.header {
+    height: 90px;
+    background-color: #484283;
+    padding: 23px 130px; 
+    box-sizing: border-box;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* max-width: 1180px; */
+}
+
+.link {
+    height: 44px;
+}
+
+.logo {
+    width: 164px;
+    height: 44px;
+}
+
+@media all and (min-width: 1023px) and (max-width: 1180px) {
+    .header {
+        padding: 23px 100px; 
+    }
+}
+
+@media all and (min-width: 767px) and (max-width: 1023px) {
+    .header {
+        padding: 23px 50px; 
+    }
+}
+
+@media all and  (max-width: 767px) {
+    .header {
+        flex-direction: column;
+        gap: 25px;
+        padding: 23px 10px; 
+        height: fit-content;
+
+    }
+}

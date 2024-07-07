@@ -1,0 +1,37 @@
+.list {
+    outline: 1px solid #C4C4C4;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;   
+    gap: 10px;
+    padding: 20px 40px ;
+}
+
+@media all and (min-width: 1179px) and (max-width: 1280px) {
+    .list {
+        padding: 20px 25px;
+    }
+}
+
+@media all and (min-width: 1023px) and (max-width: 1179px) {
+    .list {
+        padding: 20px 20px;
+    }
+}
+
+@media all and (min-width: 767px) and (max-width: 1023px) {
+}
+
+@media all and (min-width: 374px) and (max-width: 767px) {
+    .list {
+        gap: 30px;
+        padding: 20px 20px ;
+    }
+}
+
+@media all and (max-width: 374px) {
+    .list {
+        gap: 30px;
+        padding: 10px 5px ;
+    }
+}

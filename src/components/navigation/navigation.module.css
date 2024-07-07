@@ -1,0 +1,78 @@
+.menu {
+    display: flex;
+    gap: 40px;
+    height: 20px;
+}
+
+.link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    gap: 6px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.userName {
+    color: #ffffff;
+    font-weight: 600;
+    display: flex;
+    gap: 6px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.link:hover {
+    color: #C4C4C4;
+    text-decoration: underline;
+}
+
+.link:hover .cart svg path {
+    fill: #C4C4C4;
+}
+
+.cart {   
+    position: relative;
+}
+
+.icon {
+} 
+
+.counter {
+    background-color: #F14F4F;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    height: 12px;
+    padding: 0 4px 0;
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 12px;
+}
+
+
+@media all and (min-width: 1025px) and (max-width: 1180px) {
+    .menu {
+        gap: 30px;
+    }
+}
+
+@media all and (min-width: 767px) and (max-width: 1023px) {
+    .menu {
+        gap: 30px;
+    }
+}
+
+@media all and (min-width: 374px) and (max-width: 767px) {
+    .menu {
+        gap: 30px;
+    }
+}
+
+@media all and (max-width: 374px) {
+    .menu {
+        gap: 25px;
+    }
+}

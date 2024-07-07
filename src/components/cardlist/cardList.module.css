@@ -1,0 +1,31 @@
+.list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.linkUnstyled {
+    text-decoration: none; 
+    color: inherit;
+  }
+
+
+@media all and (min-width: 767px) and (max-width: 1023px) {
+    .list {
+        justify-content: center;
+    }
+}
+
+@media all and (min-width: 425px) and (max-width: 767px) {
+    .list {
+        justify-content: center;
+    }
+}
+
+@media all and (max-width: 425px) {
+    .list {
+        justify-content: center;
+    }
+}  

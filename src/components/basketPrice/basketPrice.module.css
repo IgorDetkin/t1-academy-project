@@ -1,0 +1,68 @@
+.prices {
+    width: 100%;
+}
+
+.countAndPrice {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #E5E5E5;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.containerCountAndPrice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.titleCount {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #B2B5BB;
+}
+
+.count {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #444B58;
+}
+
+.titlePrice {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    color: #B2B5BB;
+    margin-right: 10px;
+}
+
+.numPrice {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    color: #444B58;
+}
+
+
+.totalPrice {
+    display: flex;
+    justify-content: space-between;
+    height: 35px;
+    margin-top: 9px;
+}
+
+.titleTotalPrice {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #B2B5BB;
+}
+
+.numTotalPrice {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+    color: #444B58;
+
+}

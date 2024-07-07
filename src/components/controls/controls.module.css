@@ -1,0 +1,36 @@
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    justify-content: flex-end;
+    width: 188px;
+}
+
+.control {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 4px ;
+    background-color: #F14F4F;
+    border: none;
+}
+.control:hover {
+    background-color: #8C2828;
+}
+
+.control:disabled {
+    background-color: #F8AFAF;
+}
+
+.count {
+    width: 88px;
+    text-wrap: nowrap;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19.6px;
+    color: #444B58;
+    text-align: center;
+}

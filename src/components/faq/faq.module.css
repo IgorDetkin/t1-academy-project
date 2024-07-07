@@ -1,0 +1,55 @@
+.faq {
+    background-color: #484283;
+    padding: 60px 0;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.container {
+    margin: 0 auto; 
+    width: 880px;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #FFFFFF;
+    margin-bottom: 18px;
+}
+
+.list {
+    /* height: 100px; */
+    border-top: 1px solid #FFFFFF;
+}
+
+
+@media all and (min-width: 767px) and (max-width: 1023px) {
+    .faq {
+        padding: 60px 50px;
+    }
+
+    .container {
+        width: fit-content;
+    }
+}
+
+@media all and (min-width: 374px) and (max-width: 767px) {
+    .faq {
+        padding: 30px; 
+    }
+
+    .container {
+        width: fit-content;
+    }
+}
+
+@media all and (max-width: 374px) {
+    .faq {
+        padding: 30px 10px; 
+    }
+
+    .container {
+        width: fit-content;
+    }
+}

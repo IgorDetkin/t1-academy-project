@@ -1,0 +1,70 @@
+.footer {
+    height: 90px;
+    padding: 23px 130px;
+    background-color: #444B58;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 164px;
+    height: 44px;
+}
+
+.menu {
+    display: flex;
+    gap: 40px;
+}
+
+.link {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.link:hover {
+    color: #C4C4C4;
+    text-decoration: underline;
+}
+
+@media all and (min-width: 1023px) and (max-width: 1180px) {
+    .footer {
+        padding: 23px 100px; 
+    }
+    .menu {
+        gap: 30px;
+    }
+}
+
+@media all and (min-width: 767px) and (max-width: 1023px) {
+    .footer {
+        padding: 23px 50px; 
+    }
+    .menu {
+        gap: 30px;
+    }
+}
+
+@media all and (min-width: 374px) and (max-width: 767px) {
+    .footer {
+        padding: 23px 30px; 
+    }
+    .menu {
+        gap: 20px;
+    }
+}
+
+@media all and (max-width: 374px) {
+    .footer {
+        padding: 23px 10px; 
+    }
+    .menu {
+        gap: 15px;
+    }
+}
+
