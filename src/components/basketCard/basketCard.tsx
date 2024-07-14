@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import classes from "./basketCard.module.css";
 import {Link } from "react-router-dom";
 
-import { ProductInterface } from '../../types/data';
+// import { ProductInterface } from '../../types/data';
 import Controls from '../controls/controls';
+import { BasketItem } from '../../store/slices/basketSlice';
 
-const BasketCard: React.FC<ProductInterface> = ({ title, price, image, id, countInBasket, isDisabledInBasket }) => {
-  const countNumber = countInBasket || 0;
+const BasketCard: React.FC<BasketItem> = ({id, title, price, thumbnail, quantity, discountPercentage}) => {
+
+  const finalPriceForOneProduct = (price / 100 * (100 - discountPercentage)).toFixed(2);
+  const countNumber = quantity;
   const [count, setCount] = useState<number>(countNumber);
   
   const addCount = () => {
@@ -18,13 +21,13 @@ const BasketCard: React.FC<ProductInterface> = ({ title, price, image, id, count
 
   return (
     <article className={classes.card}>
-      <div className={`${classes.picAndDescription} ${isDisabledInBasket ? classes.picAndDescriptionDisabled : ' '}`} >
-        <img src={image } alt="product in basket" className={classes.pic}/>
+      <div className={classes.picAndDescription}>
+        <img src={thumbnail} alt="product in basket" className={classes.pic}/>
         <div className={classes.titleAndPrice}>
           <Link to={`/product/${id}`} className={classes.linkUnstyled}>
             <h3 className={classes.title}>{title}</h3>
           </Link>
-          <span className={classes.price}>{price}</span>
+          <span className={classes.price}>{finalPriceForOneProduct} $</span>
         </div>
       </div>
       
@@ -35,6 +38,7 @@ const BasketCard: React.FC<ProductInterface> = ({ title, price, image, id, count
               countInBasket={count}
               addCount={addCount}
               removeCount={removeCount}
+              size='small'
             />
             <button className={classes.delete}>Delete</button>
             </>
@@ -50,3 +54,5 @@ const BasketCard: React.FC<ProductInterface> = ({ title, price, image, id, count
 }
 
 export default BasketCard
+
+

@@ -7,6 +7,7 @@
     padding: 48px 130px;
     box-sizing: border-box;
     text-align: center;
+    min-height: 600px;
 }
 
 .title {
@@ -34,6 +35,16 @@
     font-weight: 400;
     line-height: 22px;
     color: #FFFFFF;
+}
+
+.emptyText {
+    padding: 50px 0;
+    width: 100%;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #B2B5BB;
+    text-align: center;
 }
 
 .buttonMore:hover {

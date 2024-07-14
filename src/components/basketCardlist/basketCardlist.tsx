@@ -1,26 +1,22 @@
 import React from 'react';
 import classes from "./basketCardlist.module.css";
 import BasketCard from '../basketCard/basketCard';
-import { productsDataForBasket } from '../../utils/databaseForBasket';
+import { BasketItemState } from '../../store/slices/basketSlice';
 
-const BasketCardlist: React.FC  = () => {
+const BasketCardlist: React.FC<BasketItemState>  = ({id, products }) => {
   return (
     <section className={classes.list}>
-      {productsDataForBasket.slice(0, 4).map(item => (
-        <div key={Math.random()}>
-        <BasketCard
-          id={item.id}        
-          title={item.title}
-          price={item.price}
-          image={item.ProductInBasketImage}
-          countInBasket={item.countInBasket}
-          isDisabledInBasket={item.isDisabledInBasket}
-        />
+
+      {products && products.map((item) => (
+        <div key={item.id}>
+           <BasketCard
+              // id={item.id}
+              {...item}        
+           />
         </div>
       )
       )}
     </section>
-
   )
 }
 

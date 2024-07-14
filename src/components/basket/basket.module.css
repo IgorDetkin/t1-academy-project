@@ -19,6 +19,15 @@
     margin-bottom: 44px;
 }
 
+.emptyText {
+    width: 100%;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #B2B5BB;
+    text-align: center;
+}
+
 @media all and (min-width: 1179px) and (max-width: 1280px) {
     .basket {
         padding: 48px 100px;

@@ -83,7 +83,7 @@
 }
 
 .controlContainer {
-    /* display: flex; */
+    height: 50px;
 }
 
 .addButton {

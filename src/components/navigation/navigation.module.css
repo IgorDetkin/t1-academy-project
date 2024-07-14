@@ -34,6 +34,7 @@
 
 .cart {   
     position: relative;
+
 }
 
 .icon {
@@ -46,10 +47,12 @@
     bottom: -4px;
     right: -4px;
     height: 12px;
-    padding: 0 4px 0;
+    padding: 0;
     font-size: 8px;
     font-weight: 400;
     line-height: 12px;
+    text-align: center;
+    width: 12px;
 }
 
 

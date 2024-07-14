@@ -5,38 +5,14 @@
 }
 
 .container {
-    margin-bottom: 114px;
+    /* margin-bottom: 114px; */
     display: flex;
     gap: 40px;
     justify-content: space-between;
 }
 
-.pictures {
-    width: 520px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-}
-
-.mainPic {
-    border-radius: 4px;
-}
-
-.miniPics {
-    display: flex;
-    justify-content: space-between;
-}
-
-.miniPic {
-    border-radius: 4px;
-}
-
-.activePic {
-    outline: 3px solid #C4C4C4;
-}
-
 .info {
-
+    overflow: hidden;
 }
 
 .title {
@@ -50,29 +26,6 @@
 .ratingAndCategory {
     display: flex;
     justify-content: space-between;
-}
-
-.stars {
-    width: 116px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.star {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.star path {
-
-}
-
-.starDeactive path {
-    fill: #D5D5D5;
 }
 
 .categories {
@@ -172,6 +125,23 @@
     color: #444B58;
 }
 
+.controlContainer {
+    width: 254px;
+    height: 62px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.emptyText {
+    padding: 50px 0;
+    width: 100%;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #B2B5BB;
+    text-align: center;
+}
+
 .addButton {
     width: 176px;
     height: 62px;
@@ -194,22 +164,23 @@
 }
 
 
-@media all and (min-width: 1179px) and (max-width: 1280px) {
-    .pictures {
-        width: 470px;
+@media all and (min-width: 1179px) and (max-width: 1380px) {
+    .buyContainer {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px
     }
-
+    .addButton {
+        width: 100%;
+    }
 }
+
 
 @media all and (min-width: 1023px) and (max-width: 1179px) {
     .product {
         padding: 48px 100px;
     }
     
-    .pictures {
-        width: 450px;
-    }
-
     .buyContainer {
         flex-direction: column;
         gap: 10px
@@ -255,6 +226,10 @@
         margin-bottom: 50px;
     }
 
+    .info {
+        width: 100%;
+    }
+
     .buyContainer {
         flex-direction: column;
         gap: 10px
@@ -271,15 +246,15 @@
     .priceBlock{
         padding-right: 18px;
     }
-    
-    .pictures {
+
+    .priceAndDiscount {
         width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    .miniPics {
-        overflow: scroll;
-        justify-content: center;
-        gap: 5px;
+    .priceBlock{
+        border-right: none;
     }
 }
 
@@ -311,14 +286,18 @@
     .priceBlock{
         padding-right: 18px;
     }
-    
-    .pictures {
-        width: 100%;
+
+    .info {
+        width: 310px;
     }
 
-    .miniPics {
-        overflow: scroll;
+    .priceAndDiscount {
+        width: 100%;
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 5px;
+    }
+
+    .priceBlock{
+        border-right: none;
     }
 }

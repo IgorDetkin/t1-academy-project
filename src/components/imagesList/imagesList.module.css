@@ -1,0 +1,116 @@
+.pictures {
+    width: 520px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.mainPic {
+    width: 520px;
+    height: 520px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.miniPics {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* overflow: hidden; */
+    overflow: visible;
+    height: 70px;
+    gap: 20px;
+}
+
+.miniPic {
+    width: 70px;
+    height: 70px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.activePic {
+    border: 3px solid #C4C4C4;
+}
+
+@media all and (min-width: 1179px) and (max-width: 1280px) {
+    .pictures {
+        width: 470px;
+    }
+    .mainPic {
+        width: 470px;
+    }
+
+    .miniPics {
+        /* overflow: scroll; */
+        gap: 10px
+    }
+}
+
+@media all and (min-width: 1023px) and (max-width: 1179px) {    
+    .pictures {
+        width: 450px;
+    }
+    .mainPic {
+        width: 450px;
+        height: 450px;
+    }  
+    
+    .miniPics {
+        overflow: scroll;
+        gap: 10px
+    }
+
+}
+
+@media all and (min-width: 767px) and (max-width: 1023px) {    
+    .pictures {
+        width: 100%;
+        align-items: center;
+    }
+    .mainPic {
+        /* width: 450px; */
+        width: 100%;
+        height: 450px;
+    }  
+
+}
+
+
+
+
+@media all and (min-width: 374px) and (max-width: 767px) {   
+    .pictures {
+        width: 100%;
+    }
+
+    .mainPic {
+        width: 100%;
+        height: 450px;
+    }    
+
+    .miniPics {
+        overflow: scroll;
+        justify-content: center;
+        gap: 5px;
+    }
+}
+
+@media all and (max-width: 374px) {   
+    .pictures {
+        width: 100%;
+    }
+
+    .mainPic {
+        width: 100%;
+        height: 400px;
+    }    
+
+    .miniPics {
+        overflow: scroll;
+        justify-content: center;
+        gap: 5px;
+    }
+}

@@ -3,12 +3,28 @@
     align-items: center;
     justify-content: space-between;
     justify-content: flex-end;
+    /* width: 188px; */
+    /* width: 100%; */
+    /* height: 100%; */
+}
+
+.small {
+    height: 50px;
     width: 188px;
+}
+
+.big {
+    height: 62px;
+    width: 254px;
+    justify-content: center;
 }
 
 .control {
     width: 50px;
-    height: 50px;
+    /* flex: 1; */
+    /* width: 100%; */
+    /* height: 50px; */
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,6 +33,12 @@
     background-color: #F14F4F;
     border: none;
 }
+
+.bigControl {
+    width: 70px;    
+}
+
+
 .control:hover {
     background-color: #8C2828;
 }
@@ -34,3 +56,38 @@
     color: #444B58;
     text-align: center;
 }
+
+
+@media all and (min-width: 1179px) and (max-width: 1380px) {
+    .bigControl {
+        /* width: 55px;     */
+    }
+
+    .big {
+        /* height: 62px; */
+        /* width: 244px; */
+    }
+}
+
+/* @media all and (min-width: 1023px) and (max-width: 1179px) {
+    .list {
+        padding: 20px 20px;
+    }
+}
+
+@media all and (min-width: 767px) and (max-width: 1023px) {
+}
+
+@media all and (min-width: 374px) and (max-width: 767px) {
+    .list {
+        gap: 30px;
+        padding: 20px 20px ;
+    }
+}
+
+@media all and (max-width: 374px) {
+    .list {
+        gap: 30px;
+        padding: 10px 5px ;
+    }
+} */

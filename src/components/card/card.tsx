@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import classes from "./card.module.css";
-import { ProductInterface } from '../../types/data';
 import Controls from '../controls/controls';
+import { CatalogItem } from '../../store/services/catalogService';
 
-const Card: React.FC<ProductInterface> = ({ title, price, image, countInBasket }) => {
 
-    const countNumber = countInBasket || 0;
+const Card: React.FC<CatalogItem> = ({  title, price, discountPercentage, thumbnail, quantity }) => {
+
+
+    const finalPriceForOneProduct = (price / 100 * (100 - discountPercentage)).toFixed(2);
+    // const countNumber = countInBasket || 0;
+    const countNumber = quantity;
     const [count, setCount] = useState<number>(countNumber);
     
     const addCount = () => {
@@ -18,13 +22,13 @@ const Card: React.FC<ProductInterface> = ({ title, price, image, countInBasket }
   return (
     <article className={classes.card}>
         <div className={classes.imageContainer}>
-            <img src={image} alt="product" className={classes.cardImage}/>
+            <img src={thumbnail} alt="product" className={classes.cardImage}/>
             <div className={classes.overlay}>Show details</div>
         </div>
         <div className={classes.container}>
             <div className={classes.titleAndPrice}>
                 <p className={classes.title}>{title}</p>
-                <span className={classes.price}>{price}</span>
+                <span className={classes.price}>{finalPriceForOneProduct} $</span>
             </div>
             <div className={classes.controlContainer} onClick={(e):void => e.preventDefault()}>
                 {   count
@@ -32,6 +36,7 @@ const Card: React.FC<ProductInterface> = ({ title, price, image, countInBasket }
                             countInBasket={count}
                             addCount={addCount}
                             removeCount={removeCount}
+                            size='small'
                         />
                     :  <button className={classes.addButton} onClick={() =>  addCount()} aria-label='add to cart'>
                             <svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

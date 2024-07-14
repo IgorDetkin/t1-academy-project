@@ -13,6 +13,10 @@ import Basket from './components/basket/basket.tsx';
 import Product from './components/product/product.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 
+import { Provider } from 'react-redux';
+import store from './store/store';
+
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -28,8 +32,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-      <HelmetProvider>
-        <RouterProvider router={router} />
-      </HelmetProvider>
+     <Provider store={store}>
+        <HelmetProvider>
+          <RouterProvider router={router} />
+        </HelmetProvider>
+      </Provider>
   </React.StrictMode>,
 )
