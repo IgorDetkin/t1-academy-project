@@ -35,7 +35,7 @@
     transition: all 0.7s ease;
 }
 
-.imageContainer:hover .overlay {
+.card:hover .overlay {
     opacity: 1;
 }
 

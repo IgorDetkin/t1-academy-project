@@ -5,7 +5,7 @@ export const faqData: faqProps[] = [
     {
         title:'How can I track the status of my order?',
         description:' After placing your order, you will receive a confirmation email containing your order number and a tracking link. You can also log in to your account on our website and go to the "My Orders" section to track your delivery status.',
-        isVisibleDesc: true,
+        isVisibleDesc: false,
     },
     {
         title:'What payment methods do you accept?',

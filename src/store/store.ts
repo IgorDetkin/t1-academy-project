@@ -2,25 +2,26 @@ import { configureStore } from '@reduxjs/toolkit';
 import basketReducer from "./slices/basketSlice";
 import { catalogService } from './services/catalogService';
 import { oneProductService } from './services/oneProductService';
-
-// interface RootState {
-//     reducer: BasketItemState;
-// }
-
-//пока не разросся редакс, убрал rootReducer .
-// const rootReducer = combineReducers({
-//     basketReducer 
-// })
+import { loginService } from './services/loginService';
+import authReducer from './slices/authSlice';
+import { isMeService } from './services/isMeService';
 
 const store = configureStore({
   reducer: {
-    // reducer: rootReducer,
     [catalogService.reducerPath]: catalogService.reducer,
     [oneProductService.reducerPath]: oneProductService.reducer,
-    basket: basketReducer
+    [loginService.reducerPath]: loginService.reducer,
+    [isMeService.reducerPath]: isMeService.reducer,
+    basket: basketReducer,
+    auth: authReducer
   },
   middleware: (getDefaultMiddleware) => 
-    getDefaultMiddleware().concat(catalogService.middleware, oneProductService.middleware)
+    getDefaultMiddleware().concat(
+      catalogService.middleware, 
+      oneProductService.middleware, 
+      loginService.middleware,
+      isMeService.middleware
+    )
 });
 
 export type RootState = ReturnType<typeof store.getState>;

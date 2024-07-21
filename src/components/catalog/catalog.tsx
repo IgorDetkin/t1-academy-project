@@ -6,15 +6,24 @@ import Promo from '../promo/promo';
 import Faq from '../faq/faq';
 import { Helmet } from 'react-helmet-async';
 import { CatalogItem, useFetchCatalogItemsQuery } from '../../store/services/catalogService';
-// import { AppDispatch, RootState } from '../../store/store';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store/store';
+import { logout } from '../../store/slices/authSlice';
 
 const Catalog: React.FC  = () => {
-  const { data, isLoading, error, } = useFetchCatalogItemsQuery(194);
+  const dispatch: AppDispatch = useDispatch();
+  const token = localStorage.getItem('jwt');
+
+  const { data, isLoading, error, } = token 
+    ? useFetchCatalogItemsQuery(194) 
+    : { data: null, isLoading: false, error: null };
+  
+  if (!token) {
+    dispatch(logout());
+  }; 
 
   const [visibleItems, setVisibleItems] = useState<number>(12);
   // const visibleProducts = data?.products?.slice(0, visibleItems);
-  // console.log(visibleProducts)
 
   const [searchReq, setSearchReq] = useState <string>('');
   const [filteredProducts, setFilteredProducts] = useState<CatalogItem[]>([]);
@@ -30,6 +39,7 @@ const Catalog: React.FC  = () => {
   }, [data, searchReq])
 
   const visibleProducts = filteredProducts.slice(0, visibleItems);
+  
 
   return (
     <>
@@ -44,9 +54,9 @@ const Catalog: React.FC  = () => {
             setSearchReq={setSearchReq}
           />
           {error 
-          ? <h2 className={classes.emptyText}>Произошла ошибка</h2> 
+          ? <h2 className={classes.emptyText}>Error. Loading failed. Try again later.</h2> 
           : (isLoading 
-              ? <h2 className={classes.emptyText}>Идет загрузка</h2> 
+              ? <h2 className={classes.emptyText}>Loading...</h2> 
               : 
                 (visibleProducts.length 
                   ? <>

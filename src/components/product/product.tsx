@@ -2,19 +2,30 @@ import React, { useEffect, useState } from 'react';
 import classes from "./product.module.css";
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ProductItem, useFetchOneProductQuery } from '../../store/services/oneProductService';
-import { RootState } from '../../store/store';
-import { useSelector } from 'react-redux';
+import { useFetchOneProductQuery } from '../../store/services/oneProductService';
+import { AppDispatch, RootState } from '../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
 import RatingStars from '../ratingStars/ratingStars';
 import Controls from '../controls/controls';
 import ImagesList from '../imagesList/imagesList';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
+import { addItemToBasket, fetchUpdateData, removeItemFromBasket } from '../../store/slices/basketSlice';
+import { logout } from '../../store/slices/authSlice';
 
-const Product: React.FC <ProductItem> = () => {
+const Product: React.FC = ({}) => {
+    const dispatch: AppDispatch = useDispatch();
+    const { id: basketId, products } = useSelector((state: RootState) => state.basket);
 
     const { id } = useParams<{ id: string }>();
-    const { data, error, isLoading } = useFetchOneProductQuery(Number(id));    
+
+    const token = localStorage.getItem('jwt');
+
+    const { data, error, isLoading } = token 
+      ? useFetchOneProductQuery(Number(id)) 
+      : { data: null, isLoading: false, error: null };
+    
+    if (!token) {
+      dispatch(logout());
+    }
 
     const productsFromBasket  = useSelector((state: RootState) => state.basket.products); //получить продукты из стейта
 
@@ -31,29 +42,39 @@ const Product: React.FC <ProductItem> = () => {
     const [count, setCount] = useState<number>(countInBasket);
 
     const addCount = () => {
+        dispatch(addItemToBasket({id: data?.id}))
         setCount(prev => prev + 1);
+      if (!products || !data ) return;  
+      let updatedProducts;
+        if(productInBasket) {
+          updatedProducts = products?.map(item => item.id === Number(id) ? { ...item, quantity: count + 1 } : item);
+        }
+        else {
+          const newProductInBasket = { 
+            id: data.id, 
+            title: data.title, 
+            price: data.price,
+            thumbnail: undefined,  
+            quantity: 1, 
+            discountPercentage: data.discountPercentage, 
+          };
+          updatedProducts = [...products, newProductInBasket];
+        }
+        dispatch(fetchUpdateData({ id: basketId, products: updatedProducts  }));
      }; 
+
+
      const removeCount = () => {
-         setCount(prev => prev - 1);
+        dispatch(removeItemFromBasket({id: data?.id}))
+        setCount(prev => prev - 1);
+        const updatedProducts = products?.map(item => item.id === Number(id) ? { ...item, quantity: count - 1 } : item);
+        dispatch(fetchUpdateData({ id: basketId, products: updatedProducts  }));
       };
+
 
       useEffect(() => { // количество товаров в корзине не тянулось в контролс, пришлось сделать хук 
         setCount(productWithQuantity.quantity);
       }, [productWithQuantity.quantity]);
-
-
-      const getErrorMessage = (error: FetchBaseQueryError | SerializedError): string => {
-        if ('status' in error) { // FetchBaseQueryError
-          if (typeof error.data === 'string') {
-            return error.data;
-          } else if (error.data && typeof error.data === 'object' && 'message' in error.data) {
-            return (error.data as { message: string }).message;
-          }
-          return 'An unknown error occurred';
-        } else {
-          return error.message || 'An unknown error occurred'; // SerializedError
-        }
-      };
 
 
   return (
@@ -64,10 +85,10 @@ const Product: React.FC <ProductItem> = () => {
     <main className={classes.product}>
         
         {error
-            ? <h2 className={classes.emptyText}>Error: {getErrorMessage(error)}</h2>
+            ? <h2 className={classes.emptyText}>Error. Loading failed. Try again later.</h2>
             :
             (isLoading
-            ? <h2 className={classes.emptyText}>Идет загрузка</h2> 
+            ? <h2 className={classes.emptyText}>Loading...</h2> 
             :
             <div className={classes.container}>
                 <ImagesList
@@ -103,15 +124,18 @@ const Product: React.FC <ProductItem> = () => {
                             </div>
                         </div>
                         {/* <div className={classes.controlContainer}> */}
-                            {count > 0  
+                            {count > 0 
                                 ? <Controls 
                                     countInBasket={count}
                                     addCount={addCount}
                                     removeCount={removeCount}
                                     size='big'
                                     sizeControl='bigControl'
+                                    stock={data?.stock}
                             />  
-                                : <button className={classes.addButton} onClick={() =>  addCount()}>Add to cart</button>
+                                : <button className={classes.addButton} 
+                                    onClick={() =>  addCount()}
+                                  >Add to cart</button>
                             }
                         
                         {/* </div> */}

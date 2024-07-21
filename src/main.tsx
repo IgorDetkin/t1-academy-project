@@ -15,6 +15,8 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import { Provider } from 'react-redux';
 import store from './store/store';
+import LoginPage from './components/loginPage/loginPage.tsx';
+import ProtectedRoutes from './components/privateRoute/privateRoute.tsx';
 
 
 const router = createBrowserRouter([
@@ -23,12 +25,21 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <Error/>,
     children: [
-      { path: '/', element: <Catalog /> },
-      { path: 'cart', element: <Basket /> },
-      { path: 'product/:id', element: <Product/> },
+      {
+        path: '/',
+        element: <ProtectedRoutes />,
+        children: [
+          { path: '/', element: <Catalog />,  },
+          { path: 'cart', element: <Basket /> },
+          { path: 'product/:id', element: <Product/> },
+        ]
+      },
+      { path: '/login', element: <LoginPage /> },
+    
     ],
   },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

@@ -4,4 +4,5 @@ export interface controlProps {
     removeCount: () => void;
     size: 'small' | 'big';
     sizeControl?: 'bigControl';  
+    stock?: number
 }

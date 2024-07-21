@@ -4,14 +4,14 @@ import BasketCard from '../basketCard/basketCard';
 import { BasketItemState } from '../../store/slices/basketSlice';
 
 const BasketCardlist: React.FC<BasketItemState>  = ({id, products }) => {
+
   return (
     <section className={classes.list}>
-
       {products && products.map((item) => (
         <div key={item.id}>
            <BasketCard
-              // id={item.id}
-              {...item}        
+              // key={item.id}
+              {...item}
            />
         </div>
       )

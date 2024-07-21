@@ -6,20 +6,20 @@ import {Link } from "react-router-dom";
 import { CatalogItemsState } from '../../store/services/catalogService';
 import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
-import { BasketItem, fetchBasket } from '../../store/slices/basketSlice';
+// import { BasketItem, } from '../../store/slices/basketSlice';
 
 const CardList: React.FC <CatalogItemsState> = ({products}) => {
 
-  const productsFromBasket  = useSelector((state: RootState) => state.basket.products);
-  // console.log(productsFromBasket);
+  const productsFromBasket  = useSelector((state: RootState) => state.basket.products); // из корзины
   
-  const sumArray = products?.map(item1 => {
-    const matchingItem = productsFromBasket?.find(item2 => item2.id === item1.id);
+  const sumArray = products?.map(item1 => {// перебор элементов из каталога 
+    const matchingItem = productsFromBasket?.find(item2 => item2.id === item1.id); //сравнение по id элементов из корзины и из каталога 
     return {
       ...item1,
       quantity: matchingItem ? matchingItem.quantity : 0
     };  
   });
+
 
 
   return (
@@ -32,8 +32,7 @@ const CardList: React.FC <CatalogItemsState> = ({products}) => {
           className={classes.linkUnstyled}
           >
         <Card 
-            {...item}      
-            // quantity={5}   
+            {...item} 
         />
         </Link> 
       )

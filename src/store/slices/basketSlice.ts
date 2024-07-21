@@ -1,17 +1,14 @@
 import { /*PayloadAction,*/ createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { BASKET_URL } from "../../utils/api";
-// import { AppDispatch,  RootState } from '../store';
-// import { fetchBasket } from "./actionCreators";
 
 export interface BasketItem  { //для товара в корзине
     id: number;
     title: string;
     price: number;
     quantity: number;
-    total: number;
+    total?: number;
     discountPercentage: number;
-    discountedTotal: number,
-    thumbnail: string;
+    discountedTotal?: number,
+    thumbnail?: string;
 }
 
 export interface BasketPriceState { //для блока цены
@@ -20,23 +17,21 @@ export interface BasketPriceState { //для блока цены
     userId?: number | undefined;
     totalProducts?: number | undefined;
     totalQuantity?: number | undefined;
+    
+    firstname?: string ;
+    lastname?: string ;
 }
 
 export interface BasketItemState extends BasketPriceState { //для всей корзины
-    id: number | undefined; //id корзины
-    products: BasketItem[] | null;
+    id: number | string | undefined; //id корзины
+    products?: BasketItem[] | null;
     isLoading?: boolean;
     error?: string | null;
 }
 
-// export interface BasketsState {
-//     carts: BasketItemState[];
-//     total?: number;
-//     skip?: number;
-//     limit?: number;
-//     isLoading?: boolean;
-//     error?: string | null;
-// }
+export interface BasketsState {
+    carts: BasketItemState[] | null;
+}
 
 
 const initialState: BasketItemState = {
@@ -44,21 +39,18 @@ const initialState: BasketItemState = {
     products: null,
     total: undefined,
     discountedTotal: undefined,
-    userId: undefined, //   HARDCODE??
+    userId: undefined,
     totalProducts: undefined,
     totalQuantity: undefined,
     isLoading: false,
     error: '',
 }
 
-
-
-
-export const fetchBasket =  createAsyncThunk<BasketItemState>(
+export const fetchBasket =  createAsyncThunk(
     'basket/fetchBasket',
-    async (_, { rejectWithValue }) => {
+    async (userId: number, { rejectWithValue }) => {
         try {
-            const response = await fetch(BASKET_URL);
+            const response = await fetch(`https://dummyjson.com/carts/user/${userId}`);
             const data = await response.json();
             return data.carts[0];
         }
@@ -71,28 +63,66 @@ export const fetchBasket =  createAsyncThunk<BasketItemState>(
 )
 
 
+export const fetchUpdateData = createAsyncThunk( 
+    "basket/fetchUpdateBasket",
+    async (updatedBasket: BasketItemState, { rejectWithValue }) => {
+      try {
+        const response = await fetch(`https://dummyjson.com/carts/${updatedBasket.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                merge: false,
+                // id: updatedBasket.id,
+                products: updatedBasket.products
+            })
+        })
+
+        const data = await response.json();
+        return data;
+    } 
+      catch (err) {
+        const error = err as Error;
+        return rejectWithValue(error.message)
+      }
+
+    }
+  );
+
 
 
 export const basketSlice = createSlice({
     name: 'basket',
     initialState,
     reducers: {
-        // funcInReducers: (state, action: PayloadAction<number>) => {
-        //     state.count += action.payload;
-        // }
-
-        // basketFetchingPending(state) {
-        //     state.isLoading = true;
-        // },
-        // basketFetchingSuccess(state, action: PayloadAction<BasketItem[]>) {
-        //     state.isLoading = false;
-        //     state.error = ' ';
-        //     state.basketItems = action.payload;
-        // },
-        // basketFetchingError(state, action: PayloadAction<string>) {
-        //     state.isLoading = false;
-        //     state.error = action.payload;
-        // }
+        // addItemToBasket(state, action: PayloadAction<BasketItem>) {
+            addItemToBasket(state, action) {
+            const item = state.products?.find((item) => item.id === action.payload.id);
+            if (item) {
+                item.quantity += 1;
+            } 
+            else {
+                state.products?.push({ ...action.payload, quantity: 1 });
+            }
+        },
+        removeItemFromBasket(state, action) {
+            const item = state.products?.find((item) => item.id === action.payload.id);
+            if(item) {
+                if (item.quantity > 1) {
+                    item.quantity -= 1;
+                } 
+                else {
+                    item.quantity = 0;
+                }
+           }
+        },
+        deleteItemsFromBasket(state, action) {
+            const item = state.products?.find((item) => item.id === action.payload.id);
+            if (item) {
+                item.quantity = 0
+            }
+        }
     },
      extraReducers: (builder) => {
         builder
@@ -101,59 +131,43 @@ export const basketSlice = createSlice({
             })
             .addCase(fetchBasket.fulfilled, (state, action) => {
                 state.isLoading = false;
-                    state.error = '';
-                    state.products = action.payload?.products;
-                    state.total = action.payload?.total;
-                    state.discountedTotal = action.payload?.discountedTotal;
-                    state.userId = action.payload?.userId;
-                    state.totalProducts = action.payload?.totalProducts;
-                    state.totalQuantity = action.payload?.totalQuantity;
+                state.error = '';
+                state.id = action.payload?.id
+                state.products = action.payload?.products || [];
+                state.total = action.payload?.total;
+                state.discountedTotal = action.payload?.discountedTotal;
+                state.userId = action.payload?.userId;
+                state.totalProducts = action.payload?.totalProducts;
+                state.totalQuantity = action.payload?.totalQuantity;
             })
             .addCase(fetchBasket.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload as string;
             })
 
+
+            .addCase(fetchUpdateData.pending, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(fetchUpdateData.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.error = '';
+                state.id = action.payload?.id
+                state.products = action.payload?.products || [];
+                state.total = action.payload?.total;
+                state.discountedTotal = action.payload?.discountedTotal;
+                state.userId = action.payload?.userId;
+                state.totalProducts = action.payload?.totalProducts;
+                state.totalQuantity = action.payload?.totalQuantity;
+            })
+            .addCase(fetchUpdateData.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload as string;
+            })
      } 
 })
 
-// export const { funcInReducers } = basketSlice.actions;
 
-
-// export const { basketFetchingPending, basketFetchingSuccess, basketFetchingError } = basketSlice.actions;
-// export const selectBasketItems = (state: RootState) => state.basket.count;
-
+export const { addItemToBasket, removeItemFromBasket, deleteItemsFromBasket } = basketSlice.actions;
 
 export default basketSlice.reducer;
-
-// export const { funcInReducers } = basketSlice.actions;
-
-// export const selectData = (state: RootState) => state.reducer.count;
-
-
-
-
-
-
-
-
-
-// import { createSlice } from '@reduxjs/toolkit';
-// import { RootState } from '../store';
-
-// interface ExampleState {
-//   data: string[];
-// }
-
-// const initialState: ExampleState = {
-//   data: [],
-// };
-
-// const exampleSlice = createSlice({
-//   name: 'example',
-//   initialState,
-//   reducers: {}
-// });
-
-// export type { ExampleState };
-// export default exampleSlice.reducer;

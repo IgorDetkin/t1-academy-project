@@ -159,9 +159,17 @@
     background-color: #8C2828;
 }
 
+/* .addButtonDisabled {
+    background-color: #F8AFAF;
+    pointer-events: none;
+} */
+
 .addButton:disabled {
     background-color: #F8AFAF;
+    pointer-events: none;
 }
+
+
 
 
 @media all and (min-width: 1179px) and (max-width: 1380px) {

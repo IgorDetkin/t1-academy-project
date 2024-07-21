@@ -9,10 +9,11 @@ export interface CatalogItem {
     discountPercentage: number;
     thumbnail: string; 
     quantity: number;
+    stock?: number
 }
 
 export interface CatalogItemsState {
-    products: CatalogItem[] | undefined,
+    products?: CatalogItem[] | undefined | null,
     total?: number,
     skip?: number,
     limit?: number,
@@ -22,7 +23,18 @@ export interface CatalogItemsState {
 
 export const catalogService = createApi({
     reducerPath: 'catalogApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/' }),
+    // baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/' }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'https://dummyjson.com/',
+        prepareHeaders: (headers) => {
+          const token = localStorage.getItem('jwt')
+          if (token) {
+            headers.set('Authorization', `Bearer ${token}`);
+          }
+          return headers;
+        },
+      }),
+
     endpoints: (builder) => ({
         fetchCatalogItems: builder.query<CatalogItemsState , number> ({
             query: (total: number = 194) => ({

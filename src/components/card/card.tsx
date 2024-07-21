@@ -2,21 +2,54 @@ import React, { useState } from 'react';
 import classes from "./card.module.css";
 import Controls from '../controls/controls';
 import { CatalogItem } from '../../store/services/catalogService';
+import { AppDispatch, RootState } from '../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemToBasket, fetchUpdateData, removeItemFromBasket } from '../../store/slices/basketSlice';
 
 
-const Card: React.FC<CatalogItem> = ({  title, price, discountPercentage, thumbnail, quantity }) => {
+const Card: React.FC<CatalogItem> = ({ id, title, price, discountPercentage, thumbnail, quantity, stock }) => {
+    const dispatch: AppDispatch = useDispatch();
+    
+
+    const { id: basketId, products } = useSelector((state: RootState) => state.basket);
 
 
     const finalPriceForOneProduct = (price / 100 * (100 - discountPercentage)).toFixed(2);
-    // const countNumber = countInBasket || 0;
     const countNumber = quantity;
     const [count, setCount] = useState<number>(countNumber);
     
     const addCount = () => {
+        dispatch(addItemToBasket({id}))
         setCount(prev => prev + 1);
+        
+        if (!products) return;
+        const productFromCatalog = products?.find(item => item.id === id ); //сравниваем ид товаров из корзины и в каталоге
+        let updatedProducts;
+
+        if (productFromCatalog) {
+          updatedProducts = products?.map(item =>
+            item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+          );
+        } 
+
+        else {
+          const newProductInBasket = { id, title, price, thumbnail, quantity: 1, discountPercentage };
+          updatedProducts = [...products, newProductInBasket];
+        // updatedProducts = products?.push(newProductInBasket)  
+        }
+        dispatch(fetchUpdateData({ id: basketId, products: updatedProducts  }));
      }; 
+
+
+
+
+
      const removeCount = () => {
+        dispatch(removeItemFromBasket({id}))
          setCount(prev => prev - 1);
+        
+        const updatedProducts = products?.map(item => item.id === id ? { ...item, quantity: count - 1 } : item);
+        dispatch(fetchUpdateData({ id: basketId, products: updatedProducts  }));
       };
  
   return (
@@ -37,6 +70,7 @@ const Card: React.FC<CatalogItem> = ({  title, price, discountPercentage, thumbn
                             addCount={addCount}
                             removeCount={removeCount}
                             size='small'
+                            stock={stock}
                         />
                     :  <button className={classes.addButton} onClick={() =>  addCount()} aria-label='add to cart'>
                             <svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

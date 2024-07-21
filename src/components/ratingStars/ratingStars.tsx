@@ -18,9 +18,7 @@ const RatingStars: React.FC<StarsItem> = ({ rating, starsLength = 5 }) => {
         key={index}
         color={index < ratingRound ? 'filledFull' : 'empty'}
       /> 
-      )}
-
-      
+      )}     
     </div>
   )
 }

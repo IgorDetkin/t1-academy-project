@@ -7,6 +7,7 @@
     align-items: center;
 }
 
+
 .card:hover {
     background-color: #F6F6F6;
 }
@@ -15,10 +16,12 @@
     display: flex;
     column-gap: 10px;
     width: 362px;
+    pointer-events: all;
 }
 
 .picAndDescriptionDisabled {
     opacity: 60%;
+    pointer-events: none;
 }
 
 .titleAndPrice {
