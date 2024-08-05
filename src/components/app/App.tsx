@@ -8,6 +8,8 @@ import { useDispatch, useSelector,  } from 'react-redux';
 import { fetchBasket } from '../../store/slices/basketSlice';
 import { useFetchCheckIsMeQuery } from '../../store/services/isMeService';
 import { login, logout } from '../../store/slices/authSlice';
+// контролы обработка кликов, медленного интернета и т.д.
+// для запроса на изменение корзниы предусмотреть состояние загрузки, ошибки
 
 
 const App: React.FC = () => {
