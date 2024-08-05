@@ -1,0 +1,172 @@
+.card {
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    background-color: #FFFFFF;
+    align-items: center;
+}
+
+
+.card:hover {
+    background-color: #F6F6F6;
+}
+
+.picAndDescription {
+    display: flex;
+    column-gap: 10px;
+    width: 362px;
+    pointer-events: all;
+}
+
+.picAndDescriptionDisabled {
+    opacity: 60%;
+    pointer-events: none;
+}
+
+.titleAndPrice {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 4px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    color: #444B58;
+    text-overflow: ellipsis;
+}
+
+.title:hover {
+    text-decoration: underline;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #444B58;
+}
+
+.controlbuttons {
+    display: flex;
+    width: 286px;
+    height: 50px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.delete {
+    margin-right: 12px;
+    margin-left: 48px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #B2B5BB;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.delete:hover {
+    color: #444B58;
+    text-decoration: underline;
+}
+
+.linkUnstyled {
+    text-decoration: none; 
+    color: inherit;
+}
+
+.addButton {
+    margin-right: 12px;
+    width: 50px;
+    height: 50px;
+    padding: 16px; 
+    border-radius: 4px ;
+    background-color: #F14F4F;
+    border: none;
+    cursor: pointer;
+}
+
+.addButton:hover {
+    background-color: #8C2828;
+}
+
+.addButton:disabled {
+    background-color: #F8AFAF;
+}
+
+@media all and (min-width: 1179px) and (max-width: 1280px) {
+    .delete {
+        margin-left: 38px;
+    }
+
+    .picAndDescription {
+        width: 340px;
+    }
+}
+
+@media all and (min-width: 1023px) and (max-width: 1179px) {
+    .delete {
+        margin-right: 0;
+        margin-left: 20px;
+    }
+
+    .picAndDescription {
+        width: 300px;
+    }
+
+    .card {
+        padding: 12px 10px;
+        gap: 16px;
+    }
+}
+
+@media all and (min-width: 767px) and (max-width: 1023px) {
+    .delete {
+        margin-right: 0;
+        margin-left: 30px;
+    }
+
+    .card {
+        gap: 18px;
+    }
+}
+
+@media all and (min-width: 374px) and (max-width: 767px) {
+    .card {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        padding: 0;
+    }
+
+    .picAndDescription {
+        width: 90%;
+        justify-content: center;
+    }
+}
+
+@media all and (max-width: 374px) {
+    .card {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        padding: 0;
+    }
+
+    .picAndDescription {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,52 @@
+.form {
+    height: 62px;
+    border-radius: 4px;
+    background-color: #F6F6F6;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    color: #444B58;
+}
+
+.input {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    color: #444B58;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    padding: 20px;
+}
+
+.input::placeholder {
+    color: #B2B5BB;
+}
+
+.input:-ms-input-placeholder {
+    color: #B2B5BB;
+}
+
+@media all and (min-width: 1023px) and (max-width: 1180px) {
+}
+
+@media all and (min-width: 767px) and (max-width: 1023px) {
+}
+
+@media all and (min-width: 374px) and (max-width: 767px) {
+    
+    .input {
+        width: 95%;
+        padding: 20px 15px;
+    }
+}
+
+@media all and (max-width: 374px) {
+    .input {
+        width: 95%;
+        padding: 20px 10px;
+    }
+}
+

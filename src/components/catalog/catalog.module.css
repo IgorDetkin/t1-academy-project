@@ -1,0 +1,85 @@
+.catalogPage {
+    
+}
+
+.catalog {
+    background-color: #FFFFFF;
+    padding: 48px 130px;
+    box-sizing: border-box;
+    text-align: center;
+    min-height: 600px;
+}
+
+.title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #444B58;
+    margin-bottom: 48px;
+    text-align: left;
+}
+
+.wrapper {
+    margin: 48px 0 ;
+}
+
+.buttonMore {
+    margin: auto;
+    width: 177px;
+    height: 62px;
+    border-radius: 4px;
+    background-color: #F14F4F;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.emptyText {
+    padding: 50px 0;
+    width: 100%;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #B2B5BB;
+    text-align: center;
+}
+
+.buttonMore:hover {
+    background-color: #8C2828;
+}
+
+.buttonMore:disabled {
+    background-color: #F8AFAF;
+}
+
+
+@media all and (min-width: 1023px) and (max-width: 1180px) {
+    .catalog {
+        padding: 23px 100px; 
+    }
+}
+
+@media all and (min-width: 767px) and (max-width: 1023px) {
+    .catalog {
+        padding: 23px 50px;
+    }
+}
+
+@media all and (min-width: 374px) and (max-width: 767px) {
+    .catalog {
+        padding: 23px 30px;
+    }
+}
+
+@media all and (max-width: 374px) {
+    .catalog {
+        padding: 23px 10px; 
+    }
+
+    .buttonMore {
+        width: 100%;
+    }
+}

@@ -1,0 +1,22 @@
+.stars {
+    width: 116px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* .star {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.star path {
+
+}
+
+.starDeactive path {
+    fill: #D5D5D5;
+} */
